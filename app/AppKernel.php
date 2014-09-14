@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new Jhonny\Bundle\AdministradorBundle\AdministradorBundle(),
             /* Bundles externos */
             new MWSimple\Bundle\CrudGeneratorBundle\MWSimpleCrudGeneratorBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new FOS\UserBundle\FOSUserBundle(),
         );

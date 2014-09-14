@@ -1,0 +1,20 @@
+{% extends 'MWSimpleCrudGeneratorBundle::layout.html.twig' %}
+
+{% block title %}
+{{ parent() }} - {{ 'views.edit.edit'|trans({'%entity%': 'Cliente'}, 'MWSimpleCrudGeneratorBundle') }}
+{% endblock %}
+
+{% block page %}
+    <h1>{{ 'views.edit.edit'|trans({'%entity%': 'Cliente'}, 'MWSimpleCrudGeneratorBundle') }}</h1>
+
+    {{ form(edit_form) }}
+
+        <div>
+    <div class="float-left">
+        <a class="btn" href="{{ path('admin_cliente') }}">
+            {{ 'views.recordactions.backtothelist'|trans({}, 'MWSimpleCrudGeneratorBundle') }}
+        </a>
+    </div>
+    <div class="float-left">{{ form(delete_form) }}</div>
+</div>
+{% endblock %}
