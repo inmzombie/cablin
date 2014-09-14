@@ -37,10 +37,10 @@
             <thead>
                 <tr>
                     <th{% if entities.isSorted('a.Id') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Id', 'a.id') }}</th>
-                    <th{% if entities.isSorted('a.Numerocliente') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Numerocliente', 'a.numeroCliente') }}</th>
-                    <th{% if entities.isSorted('a.Nombreapellido') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Nombreapellido', 'a.nombreApellido') }}</th>
+                    <th{% if entities.isSorted('a.Numerocliente') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Número Cliente', 'a.numeroCliente') }}</th>
+                    <th{% if entities.isSorted('a.Nombreapellido') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Nombre Apellido', 'a.nombreApellido') }}</th>
                     <th{% if entities.isSorted('a.Documento') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Documento', 'a.documento') }}</th>
-                    <th{% if entities.isSorted('a.Telefono') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Telefono', 'a.telefono') }}</th>
+                    <th{% if entities.isSorted('a.Telefono') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Teléfono', 'a.telefono') }}</th>
                     <th>{{ 'views.index.actions'|trans({}, 'MWSimpleCrudGeneratorBundle') }}</th>
                 </tr>
             </thead>
