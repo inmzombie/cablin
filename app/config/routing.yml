@@ -1,0 +1,5 @@
+administrador:
+    resource: "@AdministradorBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
