@@ -77,11 +77,18 @@ class Domicilio
      */
     private $tipoDomicilio;
 
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="domicilios")
+     * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
+     */
+    private $cliente;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -104,7 +111,7 @@ class Domicilio
     /**
      * Get calle
      *
-     * @return string 
+     * @return string
      */
     public function getCalle()
     {
@@ -127,7 +134,7 @@ class Domicilio
     /**
      * Get numero
      *
-     * @return string 
+     * @return string
      */
     public function getNumero()
     {
@@ -150,7 +157,7 @@ class Domicilio
     /**
      * Get manzana
      *
-     * @return string 
+     * @return string
      */
     public function getManzana()
     {
@@ -173,7 +180,7 @@ class Domicilio
     /**
      * Get barrio
      *
-     * @return string 
+     * @return string
      */
     public function getBarrio()
     {
@@ -196,7 +203,7 @@ class Domicilio
     /**
      * Get departamento
      *
-     * @return string 
+     * @return string
      */
     public function getDepartamento()
     {
@@ -219,7 +226,7 @@ class Domicilio
     /**
      * Get piso
      *
-     * @return string 
+     * @return string
      */
     public function getPiso()
     {
@@ -242,7 +249,7 @@ class Domicilio
     /**
      * Get resistenciaCentro
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getResistenciaCentro()
     {
@@ -265,10 +272,33 @@ class Domicilio
     /**
      * Get tipoDomicilio
      *
-     * @return string 
+     * @return string
      */
     public function getTipoDomicilio()
     {
         return $this->tipoDomicilio;
+    }
+
+    /**
+     * Set cliente
+     *
+     * @param \Jhonny\Bundle\AdministradorBundle\Entity\Cliente $cliente
+     * @return Domicilio
+     */
+    public function setCliente(\Jhonny\Bundle\AdministradorBundle\Entity\Cliente $cliente = null)
+    {
+        $this->cliente = $cliente;
+
+        return $this;
+    }
+
+    /**
+     * Get cliente
+     *
+     * @return \Jhonny\Bundle\AdministradorBundle\Entity\Cliente 
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
     }
 }

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="cliente")
  * @ORM\Entity(repositoryClass="Jhonny\Bundle\AdministradorBundle\Entity\ClienteRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Cliente
 {
@@ -31,9 +32,17 @@ class Cliente
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre_apellido", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
-    private $nombreApellido;
+    private $nombre;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido", type="string", length=255)
+     */
+    private $apellido;
 
     /**
      * @var string
@@ -41,7 +50,7 @@ class Cliente
      * @ORM\Column(name="documento", type="string", length=8)
      */
     private $documento;
-    
+
     /**
      * @var string
      *
@@ -49,84 +58,21 @@ class Cliente
      */
     private $telefono;
 
+    /**
+     * @var integer
+     *
+     * @ORM\OneToMany(targetEntity="Domicilio",mappedBy="cliente", cascade={"all"})
+     */
+    private $domicilios;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nrocliente
-     *
-     * @param string $nrocliente
-     * @return Cliente
-     */
-    public function setNrocliente($nrocliente)
-    {
-        $this->nrocliente = $nrocliente;
-
-        return $this;
-    }
-
-    /**
-     * Get nrocliente
-     *
-     * @return string 
-     */
-    public function getNrocliente()
-    {
-        return $this->nrocliente;
-    }
-
-    /**
-     * Set nombreyapellido
-     *
-     * @param string $nombreyapellido
-     * @return Cliente
-     */
-    public function setNombreyapellido($nombreyapellido)
-    {
-        $this->nombreyapellido = $nombreyapellido;
-
-        return $this;
-    }
-
-    /**
-     * Get nombreyapellido
-     *
-     * @return string 
-     */
-    public function getNombreyapellido()
-    {
-        return $this->nombreyapellido;
-    }
-
-    /**
-     * Set dni
-     *
-     * @param string $dni
-     * @return Cliente
-     */
-    public function setDni($dni)
-    {
-        $this->dni = $dni;
-
-        return $this;
-    }
-
-    /**
-     * Get dni
-     *
-     * @return string 
-     */
-    public function getDni()
-    {
-        return $this->dni;
     }
 
     /**
@@ -145,34 +91,11 @@ class Cliente
     /**
      * Get numeroCliente
      *
-     * @return string 
+     * @return string
      */
     public function getNumeroCliente()
     {
         return $this->numeroCliente;
-    }
-
-    /**
-     * Set nombreApellido
-     *
-     * @param string $nombreApellido
-     * @return Cliente
-     */
-    public function setNombreApellido($nombreApellido)
-    {
-        $this->nombreApellido = $nombreApellido;
-
-        return $this;
-    }
-
-    /**
-     * Get nombreApellido
-     *
-     * @return string 
-     */
-    public function getNombreApellido()
-    {
-        return $this->nombreApellido;
     }
 
     /**
@@ -191,7 +114,7 @@ class Cliente
     /**
      * Get documento
      *
-     * @return string 
+     * @return string
      */
     public function getDocumento()
     {
@@ -214,10 +137,109 @@ class Cliente
     /**
      * Get telefono
      *
-     * @return string 
+     * @return string
      */
     public function getTelefono()
     {
         return $this->telefono;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Cliente
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set apellido
+     *
+     * @param string $apellido
+     * @return Cliente
+     */
+    public function setApellido($apellido)
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
+
+    /**
+     * Get apellido
+     *
+     * @return string
+     */
+    public function getApellido()
+    {
+        return $this->apellido;
+    }
+
+    /**
+     * Post Flush Event para persistir el número de cliente
+     *
+     * @return $this
+     */
+    public function generateClientNumber()
+    {
+        $this->setNumeroCliente(
+            sprintf('%04s-%03s', $this->getId(), 1)
+        );
+        return $this;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->domicilios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add domicilios
+     *
+     * @param \Jhonny\Bundle\AdministradorBundle\Entity\Domicilio $domicilios
+     * @return Cliente
+     */
+    public function addDomicilio(\Jhonny\Bundle\AdministradorBundle\Entity\Domicilio $domicilios)
+    {
+        $this->domicilios[] = $domicilios;
+
+        return $this;
+    }
+
+    /**
+     * Remove domicilios
+     *
+     * @param \Jhonny\Bundle\AdministradorBundle\Entity\Domicilio $domicilios
+     */
+    public function removeDomicilio(\Jhonny\Bundle\AdministradorBundle\Entity\Domicilio $domicilios)
+    {
+        $this->domicilios->removeElement($domicilios);
+    }
+
+    /**
+     * Get domicilios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDomicilios()
+    {
+        return $this->domicilios;
     }
 }

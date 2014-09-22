@@ -1,0 +1,5 @@
+services:
+    client.listener:
+        class: Jhonny\Bundle\AdministradorBundle\EventListener\PostPersistCliente
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Jhonny\Bundle\AdministradorBundle\Entity\Cliente;
+use Jhonny\Bundle\AdministradorBundle\Entity\Domicilio;
 use Jhonny\Bundle\AdministradorBundle\Form\ClienteType;
 use Jhonny\Bundle\AdministradorBundle\Form\ClienteFilterType;
 
@@ -190,8 +191,10 @@ class ClienteController extends Controller
      */
     public function newAction()
     {
-        $entity = new Cliente();
-        $form   = $this->createCreateForm($entity);
+        $entity    = new Cliente();
+        $domicilio = new Domicilio();
+        $entity->addDomicilio($domicilio);
+        $form      = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,

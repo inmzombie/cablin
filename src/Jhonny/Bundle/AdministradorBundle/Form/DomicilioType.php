@@ -6,11 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * ClienteType form.
- * @author Nombre Apellido <name@gmail.com>
- */
-class ClienteType extends AbstractType
+class DomicilioType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -19,15 +15,17 @@ class ClienteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numeroCliente')
-            ->add('nombre')
-            ->add('apellido')
-            ->add('documento')
-            ->add('telefono')
-            ->add('domicilios', 'collection', array(
-                'type' => new DomicilioType()
+            ->add('calle')
+            ->add('numero', null, array(
+                'label' => 'Número',
                 )
             )
+            ->add('manzana')
+            ->add('barrio')
+            ->add('departamento')
+            ->add('piso')
+            ->add('resistenciaCentro')
+            ->add('tipoDomicilio')
         ;
     }
     
@@ -37,7 +35,7 @@ class ClienteType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Jhonny\Bundle\AdministradorBundle\Entity\Cliente'
+            'data_class' => 'Jhonny\Bundle\AdministradorBundle\Entity\Domicilio'
         ));
     }
 
@@ -46,6 +44,6 @@ class ClienteType extends AbstractType
      */
     public function getName()
     {
-        return 'jhonny_bundle_administradorbundle_cliente';
+        return 'jhonny_bundle_administradorbundle_domicilio';
     }
 }
